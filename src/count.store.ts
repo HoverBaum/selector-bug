@@ -1,5 +1,6 @@
 import { State, Action, Store, Selector, createSelector } from '@ngxs/store';
 import { Storage } from '@capacitor/core';
+import { Inject, forwardRef } from '@angular/core';
 
 export class Add {
   static readonly type = 'Add';
@@ -11,7 +12,7 @@ export class Add {
 })
 export class CountState {
 
-  constructor(private store: Store) { }
+  constructor(@Inject(forwardRef(() => Store)) private store: Store) { }
 
   @Action(Add)
   add({ getState, setState }) {
