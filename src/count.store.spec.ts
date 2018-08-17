@@ -6,7 +6,7 @@ import { CountState, Add } from './count.store';
 describe('The Count Store', () => {
   let store: Store;
 
-  beforeEach(async() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         NgxsModule.forRoot([CountState]),
