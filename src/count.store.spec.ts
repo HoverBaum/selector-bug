@@ -3,6 +3,8 @@ import { NgxsModule, Store } from '@ngxs/store';
 
 import { CountState, Add } from './count.store';
 
+import { STORAGE_TOKEN } from './tokens'
+
 describe('The Count Store', () => {
   let store: Store;
 
@@ -11,6 +13,10 @@ describe('The Count Store', () => {
       imports: [
         NgxsModule.forRoot([CountState]),
       ],
+      providers: [{
+        provide: STORAGE_TOKEN,
+        useValue: {set: () => {}}
+      }]
     });
     store = TestBed.get(Store);
   });

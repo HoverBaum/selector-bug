@@ -1,6 +1,6 @@
 import { State, Action, Store, Selector, createSelector } from '@ngxs/store';
-import { Storage } from '@capacitor/core';
-import { Inject, forwardRef } from '@angular/core';
+import { Inject } from '@angular/core';
+import { STORAGE_TOKEN } from './tokens';
 
 export class Add {
   static readonly type = 'Add';
@@ -12,24 +12,27 @@ export class Add {
 })
 export class CountState {
 
-  constructor(@Inject(forwardRef(() => Store)) private store: Store) { }
+  constructor(
+    private store: Store,
+    @Inject(STORAGE_TOKEN) private storage
+  ) { }
 
   @Action(Add)
   add({ getState, setState }) {
     const state = getState();
     setState(state + 1);
-    Storage.set({key: 'count', value: state + 1})
+    this.storage.set({key: 'count', value: state + 1})
   }
 
   // This Selector throws an error.
   // TypeError: Cannot read property 'value' of undefined
   // The below Selector however works just fine.
-  // @Selector()
-  // static currentCount(state: CountState) {
-  //   return state;
-  // }
-
-  static countState() {
-    return createSelector([CountState], (state: number) => state)
+  @Selector()
+  static currentCount(state: CountState) {
+    return state;
   }
+
+  // static countState() {
+  //   return createSelector([CountState], (state: number) => state)
+  // }
 }

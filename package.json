@@ -24,12 +24,6 @@
   },
   "jest": {
     "preset": "jest-preset-angular",
-    "setupTestFrameworkScriptFile": "<rootDir>/src/setupJest.ts",
-    "transformIgnorePatterns": [
-      "node_modules/(?!(@capacitor)/)"
-    ],
-    "transform": {
-      "^.+\\.(js|ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
-    }
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupJest.ts"
   }
 }
